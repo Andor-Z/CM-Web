@@ -16,7 +16,9 @@
         <th>所在部门</th>
         <th>职务</th>
         <th>费用</th>
+        {% if current_user.is_administrator() %}
         <th>操作</th>
+        {% endif %}
     </tr>
     
     {% for employee in employees %}
@@ -26,10 +28,12 @@
             <td>{{ employee.dept.dept_name }}</td>
             <td>{{ employee.role.role_name }}</td>
             <td>费用列表</td>
+            {% if current_user.is_administrator() %}
             <td>
             <a href="{{ url_for('main.edit_profile', id=employee.id) }}" class="btn btn-default" role="button">修改信息</a>
             <a class="btn btn-default" href="{{ url_for('main.del_employee', id=employee.id) }}" role="button">删除</a>
             </td>
+            {% endif %}
         </tr>
     {% endfor %}
 </table>

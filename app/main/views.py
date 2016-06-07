@@ -36,7 +36,7 @@ def costs_list():
     else:
         cost_pagination = Cost.query.filter_by(party_employee_id=current_user.id).order_by(Cost.event_time.desc()).paginate(page, per_page=current_app.config['NUM_PER_PAGE'], error_out=False)
     costs = cost_pagination.items
-    return render_template('costs_list_admin.html', costs=costs, pagination=cost_pagination)
+    return render_template('costs_list.html', costs=costs, pagination=cost_pagination)
 
 
 @main.route('/costs_list_admin/<int:dept_id>', methods=['GET', 'POST'])
@@ -194,7 +194,7 @@ def del_employee(id):
     return redirect(url_for('main.employee_list'))
 
 
-@main.route('/label_list')
+@main.route('/label_list', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def label_list():

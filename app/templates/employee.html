@@ -6,11 +6,11 @@
         <h1>{{ employee.employee_name }}</h1>
 
         <div class="profile-header">
-            <h1>{{ employee.employee_name }}</h1>
-            <p>{{ employee.employee_name }}</p>
-            <p>{{ employee.login_name }}</p>
-            <p>{{ employee.dept.dept_name }}</p>
-            <p>{{ employee.role.role_name }}</p>
+            <p>登录名：{{ employee.login_name }}</p>
+            <p>真实姓名：{{ employee.employee_name }}</p>
+
+            <p>所在部门：{{ employee.dept.dept_name }}</p>
+            <p>职位：{{ employee.role.role_name }}</p>
 
         <p>
             Member since {{ moment(employee.member_since).format('L') }}. <br>
@@ -20,13 +20,13 @@
 
         <p>
         {% if employee == current_user %}
-            <a class="btn btn-default" href="#">
-                Edit Profile 编辑你的个人资料
+            <a class="btn btn-default" href="{{ url_for('main.edit_profile', id = employee.id) }}">
+               编辑你的个人资料
             </a>
         {% endif %}
         {% if current_user.is_administrator() %}
-            <a class="btn btn-danger" href="#">
-                Edit Profile [Admin]
+            <a class="btn btn-danger" href="{{ url_for('main.edit_profile', id = employee.id) }}">
+                修改个人信息 [管理员]
             </a>
         {% endif %}
         </p>
