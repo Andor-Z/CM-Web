@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}费用列表 -  {{ WEB_TITLE }}{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+    {% include "_costs.html" %}
+    <div class="pagination">
+    {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
+        </div>
+{% endblock page_content %}

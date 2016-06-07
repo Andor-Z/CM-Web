@@ -1,0 +1,25 @@
+</div>
+<table  class="table table-hover" class="table table-striped" >
+    <caption><h2>费用管理</h2></caption>
+    <tr>
+        <th>发生时间</th>
+        <th>部门</th>
+        <th>分类</th>
+        <th>备注</th>
+        <th>金额</th>
+        <th>当事人</th>
+    </tr>
+  
+    {% for cost in costs %}
+        <tr>
+            <td>{{ cost.event_time }}</td>
+            <td>{{ cost.dept.dept_name }}</td>
+            <td>{{ cost.cost_label }}</td>
+            <td>{{ cost.cost_detail }}</td>
+            <td>{{ cost.cost_money }}</td>
+            <td>{{ cost.employee.employee_name }}</td>
+
+        </tr>
+    {% endfor %}
+
+</table>

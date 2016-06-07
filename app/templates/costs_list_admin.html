@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}费用列表 -  {{ WEB_TITLE }}{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+   
+<h3>费用管理</h3>
+<div class="dept-tabs">
+    <ul class="nav nav-tabs">
+        <li {% if dept_id == 0 %}
+            class="active" 
+        {% endif %}>
+            <a href="{{ url_for('main.costs_list_admin', dept_id=0) }}">所有部门</a>
+        </li>
+        {% for dept in depts %}
+            <li{% if dept_id == dept.dept_id %}
+            class="active" 
+        {% endif %}>
+                <a href="{{ url_for('main.costs_list_admin', dept_id=dept.dept_id) }}">{{ dept.dept_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<table  class="table table-hover" class="table table-striped" >
+    <caption></caption>
+    
+    <tr>
+        <th>发生时间</th>
+        <th>部门</th>
+        <th>分类</th>
+        <th>备注</th>
+        <th>金额</th>
+        <th>当事人</th>
+        {% if current_user.is_administrator() %}
+            <th>操作</th>
+        {% endif %}
+        
+    </tr>
+    <tr>
+        
+        <form class="form-inline" action="" method="post" name="">
+         {{ form.hidden_tag() }}
+        <td><div class="form-group">{{ form.event_time(class="form-control") }}</div></td>
+        <td><div class="form-group">{{ form.dept_name(class="form-control") }}</div></td>
+        <td><div class="form-group">{{ form.label_name(class="form-control") }}</div></td>
+        <td><div class="form-group">{{ form.cost_detail(class="form-control") }}</div></td>
+        <td><div class="form-group">{{ form.cost_money(class="form-control") }}</div></td>
+        <td><div class="form-group">{{ form.party_employee(class="form-control") }}</div></td>
+        {% if current_user.is_administrator() %}
+            <td><div class="form-group">{{ form.submit(class="form-control") }}</div></td>
+        {% endif %}
+        
+        </form>
+    </tr>
+    {% for cost in costs %}
+        <tr>
+            <td>{{ cost.event_time }}</td>
+            <td>{{ cost.dept.dept_name }}</td>
+            <td>{{ cost.label.label_name }}</td>
+            <td>{{ cost.cost_detail }}</td>
+            <td>{{ cost.cost_money }}</td>
+            <td>{{ cost.employee.employee_name }}</td>
+            {% if current_user.is_administrator() %}
+            <td>
+                <a class="btn btn-default" href="{{ url_for('main.edit_cost', id=cost.cost_id ) }}" role="button">修改</a>
+                <a class="btn btn-default" href="{{ url_for('main.del_cost', id=cost.cost_id) }}" role="button">删除</a>
+            </td>
+        {% endif %}
+            
+        </tr>
+    {% endfor %}
+</table>
+    <div class="pagination">
+    
+    {{ macros.pagination_widget(pagination, 'main.costs_list_admin', dept_id=dept_id) }}
+    </div>
+        </div>
+ </div>
+{% endblock page_content %}

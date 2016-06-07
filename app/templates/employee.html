@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ WEB_TITLE }} - {{ employee.employee_name }}{% endblock %}
+
+{% block page_content %}
+    <div class = "page-header">
+        <h1>{{ employee.employee_name }}</h1>
+
+        <div class="profile-header">
+            <h1>{{ employee.employee_name }}</h1>
+            <p>{{ employee.employee_name }}</p>
+            <p>{{ employee.login_name }}</p>
+            <p>{{ employee.dept.dept_name }}</p>
+            <p>{{ employee.role.role_name }}</p>
+
+        <p>
+            Member since {{ moment(employee.member_since).format('L') }}. <br>
+            Last seen {{ moment(employee.last_seen).fromNow() }}.
+        </p>
+
+
+        <p>
+        {% if employee == current_user %}
+            <a class="btn btn-default" href="#">
+                Edit Profile 编辑你的个人资料
+            </a>
+        {% endif %}
+        {% if current_user.is_administrator() %}
+            <a class="btn btn-danger" href="#">
+                Edit Profile [Admin]
+            </a>
+        {% endif %}
+        </p>
+    </div>
+    </div>
+
+{% endblock page_content %}
