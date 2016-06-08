@@ -31,6 +31,9 @@
                 {% else %}
                 <li><a href="{{ url_for('main.costs_list') }}">费用列表</a></li>
                 {% endif %}
+                {% if current_user.can(Permission.CHECKDEPT) %}
+                <li><a href="{{ url_for('main.employee_list') }}" >员工列表</a></li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -38,9 +41,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle ="dropdown">{{ current_user.employee_name }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('main.employee', employee_name = current_user.employee_name) }}">个人信息</a></li>
-                        {% if current_user.can(Permission.CHECKDEPT) %}
-                        <li><a href="{{ url_for('main.employee_list') }}" >员工列表</a></li>
-                        {% endif %}
+
                         {% if current_user.is_administrator() %}
                         <li><a href="{{ url_for('main.add_employee') }}">添加员工</a></li>
 

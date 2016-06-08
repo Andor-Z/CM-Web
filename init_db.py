@@ -27,7 +27,7 @@ def employee_fake(count=30):
             employee_name='总经理',
             login_name='zjl',
             member_since=forgery_py.date.date(True),
-            role = Role.query.filter_by(permission=Permission.CHECKALL).first())
+            role = Role.query.filter_by(permission=0x07).first())
     db.session.add(z)
     db.session.commit()
     seed()
@@ -40,7 +40,7 @@ def employee_fake(count=30):
         full_names.append(full_name)
 
     for i in range(count):
-        login_name = 'employee'+str(i+1-count)
+        login_name = 'employee'+str(i+1)
         d = Department.query.offset(randint(0, d_count-1)).first()
         e = Employee(
             password='123456',
@@ -59,18 +59,18 @@ def employee_fake(count=30):
             login_name=login_name,
             member_since=forgery_py.date.date(True),
             dept=Department.query.filter_by(dept_id=i+1-count).first(),
-            role = Role.query.filter_by(permission=Permission.CHECKDEPT).first())
+            role = Role.query.filter_by(permission=0x03).first())
         db.session.add(e)
         db.session.commit()
 
 
-def cost_fake(count=1000):
+def cost_fake(count=5000):
     seed()
     d_count = Department.query.count()
     l_count = Label.query.count()
     for i in range(count):
         d = Department.query.offset(randint(0, d_count-1)).first()
-        d_e_count = Department.query.filter_by(dept_id=d.dept_id).count()
+        d_e_count = Employee.query.filter_by(dept_id=d.dept_id).count()
         e = Employee.query.filter_by(dept=d).offset(randint(0, d_e_count-1)).first()
         l = Label.query.offset(randint(0, l_count-1)).first()
         c = Cost(
