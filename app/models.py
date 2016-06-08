@@ -36,8 +36,8 @@ class Role(db.Model):
     @staticmethod
     def insert_roles():
         roles = {'普通员工': (Permission.CHECKSELF, True),
-                 '部门经理': (Permission.CHECKDEPT, False),
-                 '总经理': (Permission.CHECKALL, False),
+                 '部门经理': (Permission.CHECKSELF | Permission.CHECKDEPT, False),
+                 '总经理': (Permission.CHECKSELF | Permission.CHECKDEPT | Permission.CHECKALL, False),
                  '管理员': (0xff, False)}
         for r in roles:
             role = Role.query.filter_by(role_name=r).first()
