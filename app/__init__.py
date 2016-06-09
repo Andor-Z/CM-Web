@@ -5,9 +5,6 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from flask_login import LoginManager
-# from flask.ext.bootstrap import Bootstrap
-# from flask.ext.sqlalchemy import SQLAlchemy
-# from flask.ext.moment import Moment
 
 
 bootstrap = Bootstrap()
@@ -33,5 +30,8 @@ def create_app(config_name):
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+    from .ck import ck
+    app.register_blueprint(ck, url_prefix='/ck')
+    app.jinja_env.add_extension("chartkick.ext.charts")
 
     return app

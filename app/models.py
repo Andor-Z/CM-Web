@@ -20,6 +20,7 @@ class Permission:
     CHECKALL = 0x04   # 查看所有的费用条目
     ADMINISTER = 0x80
 
+
 class Role(db.Model):
     # 一共4个用户角色
     # admin可以添加删除修改费用条目，可以添加修改员工信息
@@ -75,7 +76,7 @@ class Employee(UserMixin, db.Model):
         admin_password = current_app.config["ADMIN_PASSWORD"]
         e = Employee.query.filter_by(login_name='admin').first()
         if e is None:
-            admin = Employee(login_name=admin_name,employee_name='admin', password=admin_password,
+            admin = Employee(login_name=admin_name, employee_name='admin', password=admin_password,
                              role=Role.query.filter_by(permission=0xff).first())
             db.session.add(admin)
             db.session.commit()

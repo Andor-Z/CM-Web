@@ -9,44 +9,114 @@
     <h1>欢迎来到{{ WEB_TITLE }}</h1>
 
 </div>
-
-
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>背景</h2>
+<p>之前是在一家不大的公司做的财务，公司的财务不是很规范，也没有上系统。公司的费用是由不同的财务记录在Excel表上，并且不同的岗位记录费用的格式也没有规范完全看个人。然后就出现了：公司里没有人能准确知道到底花了多少钱不管是整个公司还是每个部门；季度年中年末对账时，经常出现帐对不齐，各种调账，只要求大概差不多（大概千元以内）。  </p>
+<p>在我学习Flask 后就萌生了想做一个费用管理的Web，主要是为了解决登记费用，实时查看费用等问题。当时甚至想最后能不能把公司财务、部分OA功能。嘿嘿~  </p>
+<p>然后说明一下，我本身是数学系下统计学毕业，在校只学过VB。后面在这家公司，没有技术开发、甚至没有网管。<br />
+我在这家公司做的是财务、OA、ERP的流程设计及管理。这个Web完全是我个人的想法，甚至原来公司都没有人知道我做了这个。</p>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>功能说明</h2>
+<ul>
+<li>
+<p>费用管理<br />
+查看、登记费用<br />
+管理员和总经理可以分别查看每个部门的费用<br />
+管理员可以添加、修改费用<br />
+部门经理可以查看本部门的费用<br />
+普通员工仅可以查看和自己有关的费用  </p>
+</li>
+<li>
+<p>员工列表<br />
+仅管理员、总经理、部门经理可以查看<br />
+管理员可以修改、删除员工信息</p>
+</li>
+<li>
+<p>个人信息<br />
+每个人可以修改自己的资料（不包括职务和部门）<br />
+管理员可以修改其他所有人的资料（包括职务和部门）  </p>
+</li>
+<li>
+<p>添加员工<br />
+只有管理员可以添加员工（无注册系统）  </p>
+</li>
+<li>
+<p>分类管理<br />
+管理员可以添加删除费用分类  </p>
+</li>
+<li>
+<p>可视化模块  </p>
+</li>
+</ul>
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>测试角色</h3>
+<ul>
+<li>
+<p>管理员<br />
+登陆名：admin<br />
+密码： admin  </p>
+</li>
+<li>
+<p>总经理<br />
+登录名：zjl<br />
+密码：123456  </p>
+</li>
+<li>
+<p>部门经理<br />
+登录名：bmjl1 到 bmjl8<br />
+密码：123456  </p>
+</li>
+<li>
+<p>普通员工<br />
+登录名：employee1 到 employee30<br />
+密码：123456</p>
+</li>
+</ul>
+<h2 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>需要改进的地方</h2>
+<p>非常可惜，在这个Web初步完成时，我已经从原来公司离职了。更多更复杂的功能、外观美化、交互等，确实没有动力去实现了。下面是将我自己观察到的一些需要改进的地方记录，呆以后看看是否还会有心情改进吧。 </p>
+<ul>
+<li>
+<p><a href="/ck/test">数据可视化（正在做）</a></p>
+</li>
+<li>
+<p>报表   </p>
+</li>
+<li>
+<p>重新设计权限，并非使用等级固定权限，而是使用相加赋予权限  </p>
+</li>
+<li>
+<p>增加操作员  </p>
+</li>
+<li>
+<p>部门的查看、修改，以及多级部门的实现  </p>
+</li>
+<li>
+<p>管理员重置员工密码  </p>
+</li>
+<li>
+<p>多级费用分类</p>
+</li>
+<li>
+<p>费用和部门绑定</p>
+</li>
+<li>
+<p>费用分类的数据库设计加入布尔值的显示属性，网页上的删除操作，实际为显示属性为False  </p>
+</li>
+<li>
+<p>添加费用时，是否将部门和当事人所在部门绑定？  </p>
+</li>
+<li>
+<p>发票和有关报销的设计  </p>
+</li>
+</ul>
+<h2 id="bug"><a name="user-content-bug" href="#bug" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>BUG</h2>
+<p>一小部分使用<code>unittest</code>测试过。其他的手工测试。。。。  </p>
+<h2 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>代码</h2>
+<p><a href="https://github.com/Andor-Z/CM-Web">CM-Web-Andor的GitHub</a>  </p>
+<h2 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>部署有关</h2>
+<p>部署在阿里云上<br />
+具体的可以看一下这个。<br />
+<a href="http://blog.csdn.net/Andor_ZZ/article/details/51622358">Flask&ndash;阿里云ECS上部署</a></p>
+<br>
+<p>邮箱：zyfsta@outlook.com</p>
 {% endblock %}
 
 
 
-
-
-{#
-{% import "bootstrap/wtf.html" as wtf %}
-{% import "_macros.html" as macros %}
-
-<div class="page-header">
-    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
-</div>
-<div>
-    {% if current_user.can(Permission.WRITE_ARTICLES) %}
-    {{ wtf.quick_form(form) }}
-    {% endif %}
-</div>
-<div class="post-tabs">
-    <ul class="nav nav-tabs">
-        <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">All</a></li>
-        {% if current_user.is_authenticated %}
-        <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">Followers</a></li>
-        {% endif %}
-    </ul>
-    {% include '_posts.html' %}
-</div>
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, '.index') }}
-</div>
-{% endif %}
-
-
-{% block scripts %}
-{{ super() }}
-{{ pagedown.include_pagedown() }}
-{% endblock %}
-#}

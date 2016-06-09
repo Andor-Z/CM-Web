@@ -63,7 +63,7 @@ def costs_list_admin(dept_id):
     form.event_time.data = datetime.utcnow()
     costs = cost_pagination.items
     # e =url_for('main.costs_list_admin', dept_id=dept_id)
-    return render_template('costs_list_admin.html', form=form, depts=depts,dept_id=dept_id, costs=costs, pagination=cost_pagination)
+    return render_template('costs_list_admin.html', form=form, depts=depts, dept_id=dept_id, costs=costs, pagination=cost_pagination)
 
 
 @main.route('/edit_cost/<int:id>', methods=['GET', 'POST'])
@@ -96,7 +96,7 @@ def edit_cost(id):
 def del_cost(id):
     cost = Cost.query.get_or_404(id)
     db.session.delete(cost)
-    flash(cost.event_time + cost.dept+cost.employee + '的费用记录已经被删除！')
+    flash(cost.event_time + cost.dept + cost.employee + '的费用记录已经被删除！')
     return redirect(url_for('main.costs_list'))
 
 
@@ -133,7 +133,6 @@ def logout():
 
 @main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
 @login_required
-@admin_required
 def edit_profile(id):
     employee = Employee.query.get_or_404(id)
     if current_user == employee or current_user.is_administrator():
@@ -200,12 +199,12 @@ def del_employee(id):
 def label_list():
     form = LabelForm()
     if form.validate_on_submit():
-        label = Label(label_name = form.label_name.data)
+        label = Label(label_name=form.label_name.data)
         db.session.add(label)
         flash('已经添加一个新标签。')
-        return  redirect(url_for('main.label_list'))
+        return redirect(url_for('main.label_list'))
     labels = Label.query.order_by(Label.label_name).all()
-    return  render_template('label_list.html', form=form, labels=labels)
+    return render_template('label_list.html', form=form, labels=labels)
 
 
 @main.route('/del_label/<int:id>')
@@ -214,11 +213,11 @@ def label_list():
 def del_label(id):
     label = Label.query.get_or_404(id)
     db.session.delete(label)
-    flash(label.label_name+'已经被删除了！')
+    flash(label.label_name + '已经被删除了！')
     return redirect(url_for('main.label_list'))
 
 
-@main.route('/change-password', methods = ['GET', 'POST'])
+@main.route('/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
     form = ChangePasswordForm()
@@ -230,4 +229,4 @@ def change_password():
             return redirect(url_for('main.index'))
         else:
             flash('无效的密码')
-    return render_template('change_password.html', form = form)
+    return render_template('change_password.html', form=form)

@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, DateTimeField, SubmitField, BooleanField, SelectField, TextAreaField, DecimalField,PasswordField
+from wtforms import StringField, DateTimeField, SubmitField, BooleanField, SelectField, TextAreaField, DecimalField, PasswordField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, Length, EqualTo
 from ..models import Department, Employee, Role, Label
@@ -64,7 +64,6 @@ class EditEmployeeFrom(Form):
     role_name = SelectField('职位', coerce=int)
     submit = SubmitField('确认')
 
-
     def __init__(self, employee):
         super(EditEmployeeFrom, self).__init__()
         self.dept_name.choices = [(dept.dept_id, dept.dept_name) for dept in Department.query.order_by(Department.dept_name).all()]
@@ -82,7 +81,7 @@ class EditEmployeeFrom(Form):
 
 
 class ChangePasswordForm(Form):
-    old_password = PasswordField('旧密码', validators = [DataRequired()])
-    password = PasswordField('新密码', validators = [DataRequired(), EqualTo('password2', message = '两次密码输入不一致')])
-    password2 = PasswordField('确认新密码', validators = [DataRequired()])
+    old_password = PasswordField('旧密码', validators=[DataRequired()])
+    password = PasswordField('新密码', validators=[DataRequired(), EqualTo('password2', message='两次密码输入不一致')])
+    password2 = PasswordField('确认新密码', validators=[DataRequired()])
     submit = SubmitField('提交')
