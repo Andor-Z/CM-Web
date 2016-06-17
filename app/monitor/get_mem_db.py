@@ -30,7 +30,7 @@ def get_memory():
     t = int(time.time())
     conn = sqlite3.connect('memory.db')
     cursor = conn.cursor()
-    sql = 'insert into memory (time, memtotal, memfree, buffers, cached) value (%s, %s, %s, %s)' %(time, total, free, buffers, cached)
+    sql = 'insert into memory (time, memtotal, memfree, buffers, cached) value (%d, %d, %d, %d, %d)' %(t, total, free, buffers, cached)
     cursor.execute(sql)
     cursor.close()
     conn.commit()

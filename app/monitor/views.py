@@ -4,8 +4,7 @@ from flask import render_template
 from . import monitor
 
 
-conn = sqlite3.connect('memory.db')
-cursor = conn.cursor()
+
 
 @monitor.route('/memory')
 def mermory():
@@ -14,4 +13,7 @@ def mermory():
 
 @monitor.route('/data')
 def data():
-    sql = 'select * from m'
+    conn = sqlite3.connect('memory.db')
+    cursor = conn.cursor()
+    sql = 'select * from memory'
+    cursor.execute(sql)
