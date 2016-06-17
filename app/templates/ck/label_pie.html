@@ -1,0 +1,6 @@
+
+<script src="{{ url_for('static', filename='highcharts.js') }}"></script>
+<script src="{{ url_for('static', filename='chartkick.js') }}"></script>
+
+
+{% pie_chart label_dict  with library={"title":"分类饼图","width":"400px"} %}

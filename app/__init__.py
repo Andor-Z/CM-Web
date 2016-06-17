@@ -30,6 +30,8 @@ def create_app(config_name):
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+    from .monitor import monitor as monitor_blueprint
+    app.register_blueprint(monitor_blueprint)
     from .ck import ck
     app.register_blueprint(ck, url_prefix='/ck')
     app.jinja_env.add_extension("chartkick.ext.charts")

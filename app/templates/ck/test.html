@@ -10,9 +10,9 @@
 {% endblock head %}
 {% block page_content %}
 
-
-
-
+{% area_chart data %}
+{% column_chart data with min=400 max=1000 %}
+{% line_chart data %}
 {% bar_chart data with style="width:200px; height:20px;" %}
 {% pie_chart data %}
 {% endblock %}
